@@ -15,7 +15,7 @@ public class Deposit {
         int money = sc.nextInt();
         System.out.print("Input your account type(Please type A B C or X in uppercase) : ");
         char type = sc.next().charAt(0);
-        if (type=='A'|type=='C'){
+        if (type=='A'||type=='C'){
             System.out.print("Your total money in one year = ");
             System.out.println((int) (money * 1.015));
         } else if (type=='B'){
