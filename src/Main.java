@@ -1,32 +1,21 @@
 public class Main { 
-    public static void main(String[] args) { 
-        Wallet w1 = new Wallet(); 
-        Wallet w2 = new Wallet(); 
-        w1.setBalance(200); 
-        w2.setBalance(100); 
-         
-        Programmer p1 = new Programmer(); 
-        p1.setName("Boy"); 
-        p1.setEnergy(100); 
-        p1.setWallet(w1); 
-        p1.setHappiness(100); 
-         
-        SeniorProgrammer sp1 = new SeniorProgrammer(); 
-        sp1.setName("Ploy"); 
-        sp1.setEnergy(100); 
-        sp1.setWallet(w2); 
-        sp1.setHappiness(100); 
-         
+    public static void main(String[] args) {
+        Plane p1 = new Plane(200,"IT Airline","FX-747");
+ Ship s1 = new Ship(200);
  
-        System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness()); 
-        sp1.coding('A'); 
-        sp1.coding("Bugggggg"); 
-        sp1.coding("Bugggggg",2); 
-        System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness()); 
-        System.out.println("---------------------------------"); 
-        System.out.println(p1 + "\nHappiness : " +p1.getHappiness()); 
-        p1.coding('B'); 
-        p1.coding("Deathhhhhhhh"); 
-        System.out.println(p1 + "\nHappiness : " +p1.getHappiness());      
-    } 
-} 
+ System.out.println("=== plane ===");
+ p1.startEngine();
+ p1.takeOff();
+ p1.fly();
+ p1.fly();
+ p1.honk();
+ p1.landing();
+ p1.stopEngine();
+ 
+ System.out.println("=== ship ===");
+ s1.startEngine();
+ s1.move(2);
+ s1.honk();
+ s1.stopEngine();
+    }
+}
