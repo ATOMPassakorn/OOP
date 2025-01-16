@@ -4,7 +4,7 @@ public abstract class Vehicle implements Dieselable {
         this(0.0);
     }
     public Vehicle(double fuel){
-        this.fuel=fuel;
+        this.setFuel(fuel);
     }
     public void addFuel(double fuel){
         if(this.fuel>0){

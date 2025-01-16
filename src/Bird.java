@@ -6,9 +6,9 @@ public abstract class Bird implements Flyable{
         this(0.0,0.0,0.0);
     }
     public Bird(double wingSize,double weight,double height){
-        this.wingSize=wingSize;
-        this.weight=weight;
-        this.height=height;
+        this.setWingSize(wingSize);
+        this.setWeight(weight);
+        this.setHeight(height);
     }
     public void eat(double food){
         if(food>0){

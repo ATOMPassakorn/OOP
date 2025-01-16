@@ -2,8 +2,8 @@ public class Account {
     protected double balance;
     protected String name;
     public Account(double balance,String name){
-        this.name=name;
-        this.balance=balance;
+        this.setName(name);
+        this.setBalance(balance);
     }
     public void deposit(double a){
         if(a>=0){
