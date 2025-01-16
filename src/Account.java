@@ -1,6 +1,6 @@
 public class Account {
-    public double balance;
-    public String name;
+    protected double balance;
+    protected String name;
     public Account(double balance,String name){
         this.name=name;
         this.balance=balance;

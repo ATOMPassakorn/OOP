@@ -1,12 +1,11 @@
 public class Pigeon extends Bird {
-    private int numberOfPigeon;
+    private static int numberOfPigeon;
     public Pigeon(){
         this(0.0,0.0,0.0);
-        this.numberOfPigeon+=1;
     }
     public Pigeon(double wingSize,double weight,double height){
         super(wingSize,weight,height);
-        this.numberOfPigeon+=1;
+        Pigeon.numberOfPigeon+=1;
     }
     public void eat(String food){
         if(food.equals("worm")){
@@ -18,7 +17,7 @@ public class Pigeon extends Bird {
         }
     }
     public String toString(){
-        return "Pigeon "+this.getWeight()+" kg and "+this.getHeight()+" cm. There are "+this.numberOfPigeon+" pigeons.";
+        return "Pigeon "+this.getWeight()+" kg and "+" "+this.getHeight()+" cm. There are "+Pigeon.numberOfPigeon+" pigeons.";
     }
     public void fly(){
         if(this.getWeight()>=5){
