@@ -1,7 +1,7 @@
 public class Account {
     protected double balance;
     protected String name;
-    public Account(double balance){
+    public Account(){
         this(0, "");
     }
     public Account(double balance,String name){

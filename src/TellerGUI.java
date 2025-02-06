@@ -14,7 +14,7 @@ public class TellerGUI implements ActionListener{
     public JTextField field2;
     public Account acct;
     public TellerGUI(){
-        acct = new Account(0, "");
+        acct = new Account();
         frame = new JFrame("Teller GUI");
         panel = new JPanel();
         panel2 = new JPanel();
