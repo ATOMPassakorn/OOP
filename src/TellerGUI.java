@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-public class TellerGUI {
+import java.awt.event.*;
+public class TellerGUI implements ActionListener{
     public JFrame frame;
     public JPanel panel;
     public JPanel panel2;
@@ -11,16 +12,21 @@ public class TellerGUI {
     public JButton exit;
     public JTextField field1;
     public JTextField field2;
+    public Account acct;
     public TellerGUI(){
+        acct = new Account(0, "");
         frame = new JFrame("Teller GUI");
         panel = new JPanel();
         panel2 = new JPanel();
         label1 = new JLabel("Balance");
         label2 = new JLabel("Amount");
         deposit = new JButton("Deposit");
+        deposit.addActionListener(this);
         withdraw = new JButton("Withdraw");
+        withdraw.addActionListener(this);
         exit = new JButton("Exit");
-        field1 = new JTextField("60000");
+        exit.addActionListener(this);
+        field1 = new JTextField(String.valueOf(acct.getBalance()));
         field1.setEditable(false);
         field2 = new JTextField();
         frame.setLayout(new GridLayout(2,2));
@@ -37,5 +43,18 @@ public class TellerGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(350, 250);
         frame.setVisible(true);
+    }
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if(ae.getSource().equals(withdraw)){
+            acct.withdraw(Double.parseDouble(field2.getText()));
+            field1.setText(String.valueOf(acct.getBalance()));
+        }else if(ae.getSource().equals(deposit)){
+            acct.deposit(Double.parseDouble(field2.getText()));
+            field1.setText(String.valueOf(acct.getBalance()));
+        }else if(ae.getSource().equals(exit)){
+            System.exit(0);
+        }
+        field2.setText("");
     }
 }
