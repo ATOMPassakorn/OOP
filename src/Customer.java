@@ -1,17 +1,17 @@
+import java.util.*;
 public class Customer {
     private String firstName;
     private String lastName;
-    private CheckingAccount acct;
+    private ArrayList acct;
+    private int numOfAccount;
     public Customer(){
-        this("","",null);
+        this("","");
+        acct = new ArrayList();
     }
     public Customer(String firstName,String lastName){
-        this(firstName, lastName, null);
-    }
-    public Customer(String firstName,String lastName,CheckingAccount acct){
         this.firstName=firstName;
         this.lastName=lastName;
-        this.acct=acct;
+        acct = new ArrayList();
     }
     public void setFirstName(String firstName){
         this.firstName=firstName;
@@ -25,20 +25,21 @@ public class Customer {
     public String getLastName(){
         return lastName;
     }
-    public void setAcct(CheckingAccount acct){
-        this.acct=acct;
+
+    public Account getAccount(int index){
+        return (Account)acct.get(index);
     }
-    public CheckingAccount getAcct(){
-        return acct;
+
+    public int getNumOfAccount(){
+        return acct.size();
     }
+
+    public void addAccount(Account acct){
+        this.acct.add(acct);
+        numOfAccount+=1;
+    }
+
     public String toString(){
-        if(acct==null){
-            return this.getFirstName()+" "+this.getLastName()+" doesn’t have account.";
-        }else{
-            return "The "+this.getFirstName()+" account has "+this.getAcct().getBalance()+" baht and "+this.getAcct().getCredit()+" credits.";
-        }
-    }
-    public boolean equals(Customer c){
-        return this.getFirstName().equals(c.getFirstName()) & this.getLastName().equals(c.getLastName());
+        return this.getFirstName()+" "+this.getLastName()+" has "+this.getNumOfAccount()+" accounts.";
     }
 }
