@@ -2,16 +2,17 @@ import java.util.*;
 public class Customer {
     private String firstName;
     private String lastName;
-    private ArrayList acct;
-    private int numOfAccount;
+    private CheckingAccount acct;
     public Customer(){
-        this("","");
-        acct = new ArrayList();
+        this("","",null);
     }
     public Customer(String firstName,String lastName){
+        this(firstName, lastName, null);
+    }
+    public Customer(String firstName,String lastName,CheckingAccount acct){
         this.firstName=firstName;
         this.lastName=lastName;
-        acct = new ArrayList();
+        this.acct=acct;
     }
     public void setFirstName(String firstName){
         this.firstName=firstName;
@@ -25,21 +26,20 @@ public class Customer {
     public String getLastName(){
         return lastName;
     }
-
-    public Account getAccount(int index){
-        return (Account)acct.get(index);
+    public void setAcct(CheckingAccount acct){
+        this.acct=acct;
     }
-
-    public int getNumOfAccount(){
-        return acct.size();
+    public CheckingAccount getAcct(){
+        return acct;
     }
-
-    public void addAccount(Account acct){
-        this.acct.add(acct);
-        numOfAccount+=1;
-    }
-
     public String toString(){
-        return this.getFirstName()+" "+this.getLastName()+" has "+this.getNumOfAccount()+" accounts.";
+        if(acct==null){
+            return this.getFirstName()+" "+this.getLastName()+" doesn't have account.";
+        }else{
+            return "The "+this.getFirstName()+" account has "+this.getAcct().getBalance()+" baht and "+this.getAcct().getCredit()+" credits.";
+        }
+    }
+    public boolean equals(Customer c){
+        return this.getFirstName().equals(c.getFirstName()) & this.getLastName().equals(c.getLastName());
     }
 }

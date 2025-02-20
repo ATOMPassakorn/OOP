@@ -18,7 +18,10 @@ public class CheckingAccount extends Account{
     public double getCredit(){
         return credit;
     }
-    public void withdraw(double a){
+    public void withdraw(double a) throws WithdrawException{
+        if(this.getBalance()+this.getCredit()<a){
+            throw new WithdrawException("Account "+ this.getName() +" has not enough money!");
+        }
         if(a>=0){
             if(this.getBalance()-a>=0){
                 this.setBalance(this.getBalance()-a);
@@ -34,7 +37,7 @@ public class CheckingAccount extends Account{
             System.out.println("Input number must be a positive integer.");
         }
     }
-    public void withdraw(String a){
+    public void withdraw(String a) throws WithdrawException {
         double amount = Double.parseDouble(a);
         this.withdraw(amount);
     }
