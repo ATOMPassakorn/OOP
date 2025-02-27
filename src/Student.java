@@ -1,20 +1,43 @@
-public class Student {
-    public String name;
-    public double mScore;
-    public double fScore;
-    public void showGrade(){
-        double s;
-        s=(mScore*0.4)+(fScore*0.4)+20;
-        if (s < 50){
-            System.out.println("Your grade is F");
-        } else if (s<=50 || s<60){
-            System.out.println("Your grade is D");
-        } else if (s<=60 || s<70){
-            System.out.println("Your grade is C");
-        } else if (s<=70 || s<80){
-            System.out.println("Your grade is B");
-        } else if (80<=s){
-            System.out.println("Your grade is A");
+import java.io.Serializable;
+
+public class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String name;
+    private int ID;
+    private int money;
+    public Student(){}
+    public Student(String name, int ID, int money){
+        this.name = name;
+        this.ID = ID;
+        this.money = money;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        if(money >= 0){
+            this.money = money;
+        }else {
+            this.money = 0;
         }
+
     }
 }
