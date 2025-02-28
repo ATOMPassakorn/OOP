@@ -13,8 +13,11 @@ public class StudentView implements ActionListener, WindowListener {
     public JLabel label1, label2, label3;
     public JTextField textField1, textField2, textField3;
     public Student student = new Student();
+    Font thai;
     public StudentView(){
         frame = new JFrame();
+
+        thai = new Font("Tahoma", Font.PLAIN, 14);
 
         label1 = new JLabel("ID :");
         label2 = new JLabel("Name :");
@@ -22,6 +25,7 @@ public class StudentView implements ActionListener, WindowListener {
 
         textField1 = new JTextField("");
         textField2 = new JTextField("");
+        textField2.setFont(thai);
         textField3 = new JTextField(String.valueOf(student.getMoney()));
         textField3.setEditable(false);
         loadHistory();
@@ -92,12 +96,13 @@ public class StudentView implements ActionListener, WindowListener {
     public void windowDeactivated(WindowEvent e) {}
 
     public void saveHistory(){
-        try(FileOutputStream fout = new FileOutputStream("StudentM.dat");){
-            ObjectOutputStream oout = new ObjectOutputStream(fout);
+        try(FileOutputStream fout = new FileOutputStream("StudentM.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);){
+            if(textField1.getText().isEmpty() || textField2.getText().isEmpty()){
+                return;
+            }
             student.setID(Integer.parseInt(textField1.getText()));
             student.setName(textField2.getText());
             oout.writeObject(student);
-            oout.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,32 +110,18 @@ public class StudentView implements ActionListener, WindowListener {
 
     public void loadHistory(){
         File file = new File("StudentM.dat");
-        if(!file.exists()){
-            student = new Student();
-            textField1.setText("");
-            textField2.setText("");
-            textField3.setText(String.valueOf(student.getMoney()));
+        if(!file.exists() || file.length() == 0){
+            file.delete();
             return;
         }
-        try(FileInputStream fin = new FileInputStream(file);){
-            if (fin.available() == 0) {
-                student = new Student();
-                textField1.setText("");
-                textField2.setText("");
-                textField3.setText(String.valueOf(student.getMoney()));
-                return;
-            }
-            ObjectInputStream in = new ObjectInputStream(fin);
+        try(FileInputStream fin = new FileInputStream(file); ObjectInputStream in = new ObjectInputStream(fin);){
             student = (Student) in.readObject();
-            in.close();
             textField1.setText(String.valueOf(student.getID()));
             textField2.setText(student.getName());
             textField3.setText(String.valueOf(student.getMoney()));
         } catch (EOFException ex){
-            student = new Student();
-            textField1.setText("");
-            textField2.setText("");
-            textField3.setText(String.valueOf(student.getMoney()));
+            file.delete();
+            ex.printStackTrace();
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException e) {

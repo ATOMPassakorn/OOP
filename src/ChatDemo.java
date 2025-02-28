@@ -105,14 +105,16 @@ public class ChatDemo implements ActionListener, WindowListener {
             saveHistory();
             return;
         }
-        try(FileInputStream fin = new FileInputStream(file);){
+        try(FileInputStream fin = new FileInputStream(file);
             InputStreamReader in = new InputStreamReader(fin);
-            BufferedReader bin = new BufferedReader(in);
+            BufferedReader bin = new BufferedReader(in);){
             StringBuilder content = new StringBuilder();
             String line;
 
-            while ((line = bin.readLine()) != null) {
+            line = bin.readLine();
+            while (line != null) {
                 content.append(line).append("\n");
+                line = bin.readLine();
             }
 
             textArea.setText(content.toString());
