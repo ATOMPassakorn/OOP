@@ -5,17 +5,23 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.net.URL;
+import java.util.Random;
 
-public class Poring implements MouseListener, WindowListener {
+public class Poring implements Runnable,MouseListener, WindowListener {
     public JFrame frame;
     public JPanel panel;
     public JLabel label1, label2;
     public static int count = 1;
+    public int x,y;
+    public Dimension screenSize;
+    public Random random;
     public Poring(){
         ImageIcon icon = null;
         URL imageURL = Poring.class.getResource("poring.png");
         if(imageURL != null){
-            icon = new ImageIcon(imageURL);
+            ImageIcon originalIcon = new ImageIcon(imageURL);
+            Image image = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(image);
         }
 
         frame = new JFrame();
@@ -33,8 +39,13 @@ public class Poring implements MouseListener, WindowListener {
 
         frame.add(panel);
 
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        random = new Random();
+        x = random.nextInt(screenSize.width - frame.getWidth() - 50);
+        y = random.nextInt(screenSize.height - frame.getHeight() - 50);
+
         frame.pack();
-        frame.setLocation(100,100);
+        frame.setLocation(x, y);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setVisible(true);
@@ -99,5 +110,17 @@ public class Poring implements MouseListener, WindowListener {
     @Override
     public void windowDeactivated(WindowEvent e) {
 
+    }
+
+    @Override
+    public void run() {
+        try{
+            while (true){
+                frame.setLocation(x + random.nextInt(10) - 5,y + random.nextInt(10) - 5);
+                Thread.sleep(500);
+            }
+        } catch(InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }

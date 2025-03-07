@@ -7,6 +7,8 @@ public class PoringConstructor implements ActionListener {
     public JFrame frame;
     public JPanel panel;
     public JButton button;
+    public Thread t;
+    public Poring poring;
     public PoringConstructor(){
         frame = new JFrame();
         frame.setLayout(new GridLayout(1,1));
@@ -26,7 +28,9 @@ public class PoringConstructor implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(button)){
-            new Poring();
+            poring = new Poring();
+            t = new Thread(poring);
+            t.start();
             Poring.count++;
         }
     }
